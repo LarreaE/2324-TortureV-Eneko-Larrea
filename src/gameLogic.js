@@ -33,7 +33,11 @@ export default function update()
 
 function updatePlaying()
 {
-    console.log(globals.level[0].data[0][8]);
+    updateplayer();
+    updateSpider();
+}
+function updateplayer()
+{
     if (globals.action.moveUp && globals.previousUp === false) {
         globals.playerPos[0] -= 1;  //va hacia arriba
 
@@ -74,9 +78,19 @@ function updatePlaying()
     globals.previousUp      = globals.action.moveUp;
     globals.previousLeft    = globals.action.moveLeft;
     globals.previousRight   = globals.action.moveRight;
-
 }
+function updateSpider()
+{
+    updateTimer(globals.spiderTimer);
 
+    if (globals.spiderTimer.value <= 0) {
+        spiderMove();
+        globals.spiderTimer.value = 2;
+    }
+}
+function spiderMove()
+{
+}
 function updateTimer(timer)
 {
      //incrementamos el contador de cambio de valor

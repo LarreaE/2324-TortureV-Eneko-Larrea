@@ -62,7 +62,7 @@ function renderMap()
                 globals.ctx.fillText(globals.emotes[0],32 + blockDim * (j), 48 + blockDim * i);
                 
             } 
-            if (globals.level[0].data[i][j] === 2) {
+            if (i === globals.spiderPos[0] && j === globals.spiderPos[1]) {
                 
                 globals.ctx.fillText(globals.emotes[1],32 + blockDim * (j), 48 + blockDim * i);
                 

@@ -45,7 +45,8 @@ export default {
     previousRight: false,
     previousDown: false,
 
-
+    spiderTimer: [],
+    
     //life
     life: 0,
     
@@ -53,5 +54,8 @@ export default {
     score: 0,
     
     playerPos: [],
+
+    spiderPos: [],
+
 
 }

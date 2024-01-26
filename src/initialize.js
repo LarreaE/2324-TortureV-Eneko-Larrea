@@ -2,6 +2,7 @@ import globals from "./globals.js";
 import { FPS, Game } from "./constants.js";
 import { Level, level1 } from "./Level.js";
 import { KeydownHandler, KeyupHandler } from "./events.js";
+import Timer from "./Timer.js";
 
 //funcion que inicializa los elementos HTML
 function initHTMLelements()
@@ -45,6 +46,29 @@ function initVars()
     //variables de logica de juego
     globals.life = 3;
     globals.playerPos = [7,8];
+
+    let filChanches = [1,10];
+    let colChances  = [1,15];
+
+
+    let randomFil = Math.random() * 10;
+    if (randomFil < 5) {
+        randomFil = filChanches[0];
+    }
+    else {
+        randomFil = filChanches[1];
+    }
+
+    let randomCol = Math.random() * 10;
+
+    if (randomCol < 5) {
+        randomCol = colChances[0];
+    }
+    else {
+        randomCol = colChances[1];
+    }
+
+    globals.spiderPos = [randomFil,randomCol]
 }
 
 //carga de activos:TILEMAPS, IMAGES, SOUNDS
@@ -123,6 +147,11 @@ function initLevel()
 
 }
 
+function initTimers()
+{
+    globals.spiderTimer   = new Timer(1, 0.5);
+
+}
 export {
 
     initHTMLelements,
@@ -130,5 +159,6 @@ export {
     loadAssets,
     initLevel,
     initEvents,
+    initTimers,
 
 }
