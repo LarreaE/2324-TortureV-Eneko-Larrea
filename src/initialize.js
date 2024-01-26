@@ -107,36 +107,6 @@ function loadAssets()
 
     
 }
-//funcion que llama cada vez que se carga un activo
-function loadHandler()
-{
-    globals.assetsLoaded++;
-
-    //una vez se han cargado todos los activos pasamos
-    if (globals.assetsLoaded === globals.assetsToLoad.length)
-    {
-
-            //remove the load event listener
-        for (let i = 0; i < globals.tileSets.length; ++i) {
-            
-            globals.tileSets[i].removeEventListener("load", loadHandler, false);
-        
-        }
-        
-        for (let i = 0; i < globals.sounds.length; i++) {
-            
-            globals.sounds[i].removeEventListener("canplaythrough", loadHandler, false);
-            
-        }
-
-        console.log("Assets finished loading");
-
-        //start the game
-        globals.gameState = Game.PLAYING;
-
-    }
-
-}
 
 function initEvents()
 {
@@ -156,7 +126,7 @@ function initLevel()
 
 function initTimers()
 {
-    globals.spiderTimer   = new Timer(1, 0.5);
+    globals.spiderTimer   = new Timer(1, 0.1);
 
 }
 export {
