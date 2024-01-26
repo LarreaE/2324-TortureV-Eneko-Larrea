@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game , mapHeight, mapWidth } from "./constants.js";
+import { Game , mapHeight, mapWidth, SPIDER } from "./constants.js";
 
 
 export default function update()
@@ -18,7 +18,6 @@ export default function update()
        
         case Game.GAME_OVER:
             console.log("game over...");
-            updateGameOver();
             break;
 
             
@@ -90,7 +89,7 @@ function updateSpider()
 
     if (globals.spiderTimer.value <= 0) {
         spiderMove();
-        globals.spiderTimer.value = 2;
+        globals.spiderTimer.value = 8;
     }
 }
 function spiderMove()
@@ -109,11 +108,21 @@ function spiderMove()
         moveOptionCounter += 1;
         options.push(globals.spiderCanUp);
     }
+    else {
+
+        options.push(false);
+
+    }
     if (globals.level[0].data[globals.spiderPos[0]+1][globals.spiderPos[1]] === 0) { //no hay colision arriba
         
         globals.spiderCanDown = true;
         moveOptionCounter += 1;
         options.push(globals.spiderCanDown);
+
+    }
+    else {
+        
+        options.push(false);
 
     }
     if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]-1] === 0) { //no hay colision arriba
@@ -123,6 +132,11 @@ function spiderMove()
         options.push(globals.spiderCanLeft);
 
     }
+    else {
+        
+        options.push(false);
+
+    }
     if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]+1] === 0) { //no hay colision arriba
         
         globals.spiderCanRight = true;
@@ -130,46 +144,79 @@ function spiderMove()
         options.push(globals.spiderCanRight);
 
     }
-    console.log(options);
+    else {
+        
+        options.push(false);
+
+    }
+    console.log("options: " + options);
+    let moving = [globals.spiderMovingUp,globals.spiderMovingDown,globals.spiderMovingLeft,globals.spiderMovingRight]
+    console.log("moving: " + moving);
+    console.log("spiderMoving: " + globals.spiderMoving);
+    //ORDEN DE MOVIMIENTOS EN EL ARRAY 
+    /* 
+    0-UP
+    1-DOWN
+    2-LEFT
+    3-RIGHT
+    */
+
     if (moveOptionCounter > 2) // si tiene opciones que haga el cambio aleatorio 
     {
-        
+        globals.spiderMoving = false;
     }
-    if (1==1) { //no ha empezado a moverse
+    if (!globals.spiderMoving) { //no ha empezado a moverse
         
+        globals.spiderMoving = true;
+
         let randomNum = Math.floor(Math.random()* options.length);
 
-        if (options[randomNum] === globals.spiderCanDown) {
-            
-            globals.spiderMoving = true;
-            globals.spiderPos[0] += 1;
-
-        }
-        else if (options[randomNum] === globals.spiderCanUp) {
-            
-            globals.spiderMoving = true;
+        if (options[SPIDER.UP] === true && randomNum === SPIDER.UP ) {
+            console.log("BOP");
+            globals.spiderMovingUp = true;
             globals.spiderPos[0] -= 1;
 
         }
-        else if (options[randomNum] === globals.spiderCanRight) {
+        else if (options[SPIDER.DOWN] === true && randomNum === SPIDER.DOWN  ) {
+            console.log("ca");
             
-            globals.spiderMoving = true;
-            globals.spiderPos[1] += 1;
+            globals.spiderMovingDown = true;
+            globals.spiderPos[0] += 1;
 
         }
-        else if (options[randomNum] === globals.spiderCanDown) {
-            
-            globals.spiderMoving = true;
+        else if (options[SPIDER.LEFT] === true && randomNum === SPIDER.LEFT ) {
+            console.log("a");
+            globals.spiderMovingLeft = true;
             globals.spiderPos[1] -= 1;
+
+        }
+        else if (options[SPIDER.RIGHT] === true && randomNum === SPIDER.RIGHT ) {
+            console.log("ab");
+            
+            globals.spiderMovingRight = true;
+            globals.spiderPos[1] += 1;
 
         }
     }
     else {  //continua camino
+        if (globals.spiderMovingUp) {
 
-        if (options[0] === globals.spiderCanDown) {
+            globals.spiderPos[0] -= 1;
             
-            globals.spiderMoving = true;
+        }
+        else if (globals.spiderMovingDown) {
+
             globals.spiderPos[0] += 1;
+            
+        }
+        else if (globals.spiderMovingLeft) {
+            
+            globals.spiderPos[1] -= 1;
+            
+        }
+        else if (globals.spiderMovingRight) {
+            
+            globals.spiderPos[1] -= 1;
 
         }
     }

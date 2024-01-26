@@ -59,11 +59,18 @@ export default {
 
     moneyPos: [],
 
-    spiderCanUp: false,
-    spiderCanDown: false,
-    spiderCanLeft: false,
-    spiderCanRight: false,
-    spiderMoving: false,
+    spiderCanUp:        false,
+    spiderCanDown:      false,
+    spiderCanLeft:      false,
+    spiderCanRight:     false,
+
+    spiderMoving:       false,
+    
+    spiderMovingUp:     false,
+    spiderMovingDown:   false,
+    spiderMovingLeft:   false,
+    spiderMovingRight:  false,
+
 
     isThereMoney: false,
 }

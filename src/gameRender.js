@@ -108,3 +108,10 @@ function drawHeart(life)
         
     }
 }
+function gameOver()
+{
+    //draw Game over
+    globals.ctx.font = '16px emulogic';
+    globals.ctx.fillStyle = 'purple';
+    globals.ctx.fillText("Game Over", 130 , globals.canvas.height/2);
+}
