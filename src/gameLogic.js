@@ -193,12 +193,12 @@ function spiderMove()
     }
     else {
         
-        keepMoving();
+        keepMoving(moveOptionCounter);
     
     }
    
 }
-function keepMoving()
+function keepMoving(moveOptionCounter)
 {
     if (globals.spiderMovingUp && globals.spiderCanUp) {
 
@@ -221,11 +221,50 @@ function keepMoving()
 
     }
     else {
-            globals.spiderMoving = false;
-            globals.spiderMovingUp = false;
-            globals.spiderMovingDown = false;
-            globals.spiderMovingLeft = false;
-            globals.spiderMovingRight = false;
+        if (moveOptionCounter === 2) {
+            if (globals.spiderCanUp) {
+
+                globals.spiderMoving        = true;
+                globals.spiderMovingUp      = true;
+                globals.spiderMovingDown    = false;
+                globals.spiderMovingLeft    = false;
+                globals.spiderMovingRight   = false;
+            }
+            else if (globals.spiderCanDown) {
+
+                globals.spiderMoving        = true;
+                globals.spiderMovingUp      = false;
+                globals.spiderMovingDown    = true;
+                globals.spiderMovingLeft    = false;
+                globals.spiderMovingRight   = false;
+            }
+            else if (globals.spiderCanLeft) {
+                globals.spiderMoving        = true;
+                globals.spiderMovingUp      = false;
+                globals.spiderMovingDown    = false;
+                globals.spiderMovingLeft    = true;
+                globals.spiderMovingRight   = false;
+            }
+            else if (globals.spiderCanRight) {
+
+                globals.spiderMoving        = true;
+                globals.spiderMovingUp      = false;
+                globals.spiderMovingDown    = false;
+                globals.spiderMovingLeft    = false;
+                globals.spiderMovingRight   = true;
+
+            }
+        
+        }
+        else {
+
+            globals.spiderMoving        = false;
+            globals.spiderMovingUp      = false;
+            globals.spiderMovingDown    = false;
+            globals.spiderMovingLeft    = false;
+            globals.spiderMovingRight   = false;
+        }
+           
     }
 }
 function updateMoney()
