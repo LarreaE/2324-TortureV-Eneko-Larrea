@@ -4,7 +4,6 @@ import { Game } from "./constants.js";
 
 export default function update()
 {
-  
     
     //change what the game is doing based on the game state
     switch(globals.gameState)

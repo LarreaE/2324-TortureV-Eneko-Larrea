@@ -1,11 +1,10 @@
 import globals from "./globals.js";
-import { Game } from "./constants.js";
+import { Game ,mapHeight, mapWidth, blockDim} from "./constants.js";
 
 
 //Funcion que renderiza los graficos
 export default function render()
 {
-
     //change what the game is doing based on the game state
     switch(globals.gameState)
     {
@@ -48,7 +47,20 @@ function drawGame()
 function renderMap()
 {
     globals.ctx.font = '14px';
-    globals.ctx.fillText("\u2B1c", 0, 50);
+
+    console.log(globals.level[0].data[0]);
+
+    for (let i = 0; i < mapHeight; i++) {
+
+        for (let j = 0; j < mapWidth; j++) {
+
+            if (globals.level[0].data[i][j] == 1) {
+                
+                globals.ctx.fillText("\u2B1c",32 + blockDim * (j), 48 + blockDim * i);
+                
+            }  
+        }     
+    }
 }
 function renderEmoticon()
 {
@@ -61,6 +73,6 @@ function renderHUD()
         // Draw score
     globals.ctx.font = '16px emulogic';
     globals.ctx.fillStyle = 'purple';
-    globals.ctx.fillText("Score", 0, 30);
+    globals.ctx.fillText("Score", 0, 26);
 
 }

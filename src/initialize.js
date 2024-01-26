@@ -1,5 +1,6 @@
 import globals from "./globals.js";
 import { FPS, Game } from "./constants.js";
+import { Level, level1 } from "./Level.js";
 
 //funcion que inicializa los elementos HTML
 function initHTMLelements()
@@ -105,8 +106,19 @@ function loadHandler()
 
 }
 
+function initLevel()
+{
+    const map1 = new Level(level1);
+
+    globals.level.push(map1);
+    
+}
+
 export {
+
     initHTMLelements,
     initVars,
     loadAssets,
+    initLevel,
+
 }
