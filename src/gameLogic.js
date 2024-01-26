@@ -85,7 +85,7 @@ function updateSpider()
 
     if (globals.spiderTimer.value <= 0) {
         spiderMove();
-        globals.spiderTimer.value = 1;
+        globals.spiderTimer.value = 0.1;
     }
 }
 function spiderMove()
@@ -101,8 +101,8 @@ function spiderMove()
     if (globals.level[0].data[globals.spiderPos[0]-1][globals.spiderPos[1]] === 0) { //no hay colision arriba
         
         globals.spiderCanUp = true;
-        moveOptionCounter += 1;
         options.push(globals.spiderCanUp);
+        moveOptionCounter += 1;
     }
     else {
 
@@ -112,8 +112,8 @@ function spiderMove()
     if (globals.level[0].data[globals.spiderPos[0]+1][globals.spiderPos[1]] === 0) { //no hay colision arriba
         
         globals.spiderCanDown = true;
-        moveOptionCounter += 1;
         options.push(globals.spiderCanDown);
+        moveOptionCounter += 1;
 
     }
     else {
@@ -124,8 +124,8 @@ function spiderMove()
     if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]-1] === 0) { //no hay colision arriba
         
         globals.spiderCanLeft = true;
-        moveOptionCounter += 1;
         options.push(globals.spiderCanLeft);
+        moveOptionCounter += 1;
 
     }
     else {
@@ -136,8 +136,8 @@ function spiderMove()
     if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]+1] === 0) { //no hay colision arriba
         
         globals.spiderCanRight = true;
-        moveOptionCounter += 1;
         options.push(globals.spiderCanRight);
+        moveOptionCounter += 1;
 
     }
     else {
@@ -153,19 +153,79 @@ function spiderMove()
     2-LEFT
     3-RIGHT
     */
-    
+        if (moveOptionCounter > 2) {
+
+            globals.spiderMoving = false;
+            globals.spiderMovingUp = false;
+            globals.spiderMovingDown = false;
+            globals.spiderMovingLeft = false;
+            globals.spiderMovingRight = false;
+
+        }
+    console.log(moveOptionCounter);
     let randomNum = Math.floor(Math.random() * options.length);
-    if (randomNum === SPIDER.UP && options[SPIDER.UP]) {
+    if (!globals.spiderMoving) {
+
+        if (randomNum === SPIDER.UP && options[SPIDER.UP] ) {
+            globals.spiderPos[0] -= 1;
+            globals.spiderMoving = true;
+            globals.spiderMovingUp = true;
+
+        }
+        else if (randomNum === SPIDER.DOWN && options[SPIDER.DOWN]) {
+            globals.spiderPos[0] += 1;
+            globals.spiderMoving = true;
+            globals.spiderMovingDown = true;
+
+        }
+        else if (randomNum === SPIDER.LEFT && options[SPIDER.LEFT]) {
+            globals.spiderPos[1] -= 1;
+            globals.spiderMoving = true;
+            globals.spiderMovingLeft = true;
+
+        }
+        else if (randomNum === SPIDER.RIGHT && options[SPIDER.RIGHT]) {
+            globals.spiderPos[1] += 1;
+            globals.spiderMoving = true;
+            globals.spiderMovingRight = true;
+
+        }
+    }
+    else {
+        
+        keepMoving();
+    
+    }
+   
+}
+function keepMoving()
+{
+    if (globals.spiderMovingUp && globals.spiderCanUp) {
+
         globals.spiderPos[0] -= 1;
+        
     }
-    else if (randomNum === SPIDER.DOWN && options[SPIDER.DOWN]) {
+    else if (globals.spiderMovingDown  && globals.spiderCanDown) {
+
         globals.spiderPos[0] += 1;
+
     }
-    else if (randomNum === SPIDER.LEFT && options[SPIDER.LEFT]) {
+    else if (globals.spiderMovingLeft  && globals.spiderCanLeft) {
+
         globals.spiderPos[1] -= 1;
+
     }
-    else if (randomNum === SPIDER.RIGHT && options[SPIDER.RIGHT]) {
+    else if (globals.spiderMovingRight  && globals.spiderCanRight) {
+
         globals.spiderPos[1] += 1;
+
+    }
+    else {
+            globals.spiderMoving = false;
+            globals.spiderMovingUp = false;
+            globals.spiderMovingDown = false;
+            globals.spiderMovingLeft = false;
+            globals.spiderMovingRight = false;
     }
 }
 function updateMoney()
