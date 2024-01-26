@@ -13,7 +13,7 @@ export default function update()
             break;
 
         case Game.PLAYING:
-
+            updatePlaying();
             break;
        
         case Game.GAME_OVER:
@@ -28,5 +28,31 @@ export default function update()
 
     }
 
+
+}
+
+function updatePlaying()
+{
+    if (globals.action.moveUp && globals.previousUp === false) {
+        console.log("moveup");
+        globals.playerPos[0] -= 1;  //va hacia arriba
+    }
+    else if (globals.action.moveDown && globals.previousDown === false) {
+        console.log("movedow");
+        globals.playerPos[0] += 1;  //va hacia abajo
+    }
+    else if (globals.action.moveLeft && globals.previousLeft === false) {
+        console.log("moveulef");
+        globals.playerPos[1] -= 1;  //va hacia la izquierda
+    }
+    else if (globals.action.moveRight && globals.previousRight === false) {
+        console.log("moverigth");
+        globals.playerPos[1] += 1;  //va hacia la derecha
+    }
+
+    globals.previousDown    = globals.action.moveDown;
+    globals.previousUp      = globals.action.moveUp;
+    globals.previousLeft    = globals.action.moveLeft;
+    globals.previousRight   = globals.action.moveRight;
 
 }

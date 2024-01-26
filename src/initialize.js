@@ -1,6 +1,7 @@
 import globals from "./globals.js";
 import { FPS, Game } from "./constants.js";
 import { Level, level1 } from "./Level.js";
+import { KeydownHandler, KeyupHandler } from "./events.js";
 
 //funcion que inicializa los elementos HTML
 function initHTMLelements()
@@ -42,8 +43,8 @@ function initVars()
     }
 
     //variables de logica de juego
-    globals.life = 1;
-
+    globals.life = 3;
+    globals.playerPos = [7,8];
 }
 
 //carga de activos:TILEMAPS, IMAGES, SOUNDS
@@ -106,12 +107,20 @@ function loadHandler()
 
 }
 
+function initEvents()
+{
+    //add the keyboard event listeners
+    window.addEventListener("keydown",  KeydownHandler,  false);
+    window.addEventListener("keyup",    KeyupHandler,    false);
+    
+}
+
 function initLevel()
 {
     const map1 = new Level(level1);
 
     globals.level.push(map1);
-    
+
 }
 
 export {
@@ -120,5 +129,6 @@ export {
     initVars,
     loadAssets,
     initLevel,
+    initEvents,
 
 }

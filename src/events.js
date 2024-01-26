@@ -3,10 +3,6 @@ import globals from "./globals.js";
 
 export function KeydownHandler(event)
 {
-
-    const PLAYER = globals.sprites.find((Player) => Player.id === SpriteID.PLAYER);
-    const lamp = globals.sprites.find((lamp) => lamp.id === SpriteID.LAMP);
-    const FIREBREATH = globals.sprites.find((Fire) => Fire.id === SpriteID.FIREBREATH);
     
     switch (event.code) 
     {
@@ -21,14 +17,14 @@ export function KeydownHandler(event)
                 break;
     
             case "ArrowUp":
-                globals.action.menuUp  = true;
+                globals.action.moveUp  = true;
                 
                 
                 break;
             
             case "ArrowDown":
     
-                    globals.action.menuDown  = true;
+                globals.action.moveDown  = true;
                     
                     
                     break;
@@ -40,9 +36,9 @@ export function KeydownHandler(event)
 
 export function KeyupHandler(event)
 {
-    const lamp = globals.sprites.find((Lamp) => Lamp.id === SpriteID.LAMP);
 
     switch (event.code) {
+
         case "ArrowRight":
             globals.action.moveRight = false;
             
@@ -53,14 +49,14 @@ export function KeyupHandler(event)
             break;
 
         case "ArrowUp":
-            globals.action.menuUp  = false;
+            globals.action.moveUp  = false;
             
             
             break;
         
         case "ArrowDown":
 
-                globals.action.menuDown  = false;
+            globals.action.moveDown  = false;
                 
                 
                 break;

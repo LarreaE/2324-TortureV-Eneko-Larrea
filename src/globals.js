@@ -40,7 +40,11 @@ export default {
     action: {},
 
     //player previous state
-    previousState: 0,
+    previousUp: false,
+    previousLeft: false,
+    previousRight: false,
+    previousDown: false,
+
 
     //life
     life: 0,
@@ -48,4 +52,6 @@ export default {
     //score
     score: 0,
     
+    playerPos: [],
+
 }
