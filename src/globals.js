@@ -63,6 +63,7 @@ export default {
     spiderCanDown: false,
     spiderCanLeft: false,
     spiderCanRight: false,
+    spiderMoving: false,
 
     isThereMoney: false,
 }

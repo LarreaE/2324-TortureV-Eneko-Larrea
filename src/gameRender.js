@@ -82,6 +82,9 @@ function renderHUD()
     globals.ctx.font = '16px emulogic';
     globals.ctx.fillStyle = 'purple';
     globals.ctx.fillText("Score:", 0, 26);
+    globals.ctx.fillStyle = 'gray';
+    globals.ctx.fillText(globals.score, 100, 26);
+
 
     drawHeart(globals.life)
 

@@ -36,6 +36,7 @@ function updatePlaying()
     updateplayer();
     updateSpider();
     updateMoney();
+    gameOverConditions();
 }
 function updateplayer()
 {
@@ -75,6 +76,9 @@ function updateplayer()
         }
     }
 
+    takeMoney();
+    takeDamage();
+
     globals.previousDown    = globals.action.moveDown;
     globals.previousUp      = globals.action.moveUp;
     globals.previousLeft    = globals.action.moveLeft;
@@ -91,7 +95,84 @@ function updateSpider()
 }
 function spiderMove()
 {
+    let moveOptionCounter   = 0;
+    globals.spiderCanDown   = false;
+    globals.spiderCanUp     = false;
+    globals.spiderCanLeft   = false;
+    globals.spiderCanRight  = false;
 
+    let options = []; //variable que da las opciones de movimiento
+
+    if (globals.level[0].data[globals.spiderPos[0]-1][globals.spiderPos[1]] === 0) { //no hay colision arriba
+        
+        globals.spiderCanUp = true;
+        moveOptionCounter += 1;
+        options.push(globals.spiderCanUp);
+    }
+    if (globals.level[0].data[globals.spiderPos[0]+1][globals.spiderPos[1]] === 0) { //no hay colision arriba
+        
+        globals.spiderCanDown = true;
+        moveOptionCounter += 1;
+        options.push(globals.spiderCanDown);
+
+    }
+    if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]-1] === 0) { //no hay colision arriba
+        
+        globals.spiderCanLeft = true;
+        moveOptionCounter += 1;
+        options.push(globals.spiderCanLeft);
+
+    }
+    if (globals.level[0].data[globals.spiderPos[0]][globals.spiderPos[1]+1] === 0) { //no hay colision arriba
+        
+        globals.spiderCanRight = true;
+        moveOptionCounter += 1;
+        options.push(globals.spiderCanRight);
+
+    }
+    console.log(options);
+    if (moveOptionCounter > 2) // si tiene opciones que haga el cambio aleatorio 
+    {
+        
+    }
+    if (1==1) { //no ha empezado a moverse
+        
+        let randomNum = Math.floor(Math.random()* options.length);
+
+        if (options[randomNum] === globals.spiderCanDown) {
+            
+            globals.spiderMoving = true;
+            globals.spiderPos[0] += 1;
+
+        }
+        else if (options[randomNum] === globals.spiderCanUp) {
+            
+            globals.spiderMoving = true;
+            globals.spiderPos[0] -= 1;
+
+        }
+        else if (options[randomNum] === globals.spiderCanRight) {
+            
+            globals.spiderMoving = true;
+            globals.spiderPos[1] += 1;
+
+        }
+        else if (options[randomNum] === globals.spiderCanDown) {
+            
+            globals.spiderMoving = true;
+            globals.spiderPos[1] -= 1;
+
+        }
+    }
+    else {  //continua camino
+
+        if (options[0] === globals.spiderCanDown) {
+            
+            globals.spiderMoving = true;
+            globals.spiderPos[0] += 1;
+
+        }
+    }
 }
 function updateMoney()
 {
@@ -102,12 +183,9 @@ function updateMoney()
 
             for (let j = 0; j < mapWidth; j++) {
     
-    
-    
                 if (globals.level[0].data[i][j] === 0) {
                     
                     let dice = Math.random() * 100;
-                    console.log(dice);
                     if (dice < 1) {
                         globals.isThereMoney = true;
                         globals.moneyPos[0] = i;
@@ -116,10 +194,31 @@ function updateMoney()
                 }  
             }
         }
-    }
-    
+    }   
 }
+function takeMoney()
+{
+    if (globals.playerPos[0] === globals.moneyPos[0] && globals.playerPos[1] === globals.moneyPos[1]) {
+        
+        globals.score += 100;
+        globals.moneyPos[0] = -10; //desaparece
+        globals.isThereMoney = false;
+    }
+}
+function takeDamage()
+{
+    if (globals.playerPos[0] === globals.spiderPos[0] && globals.playerPos[1] === globals.spiderPos[1]) {
+        
+        globals.playerPos[0] = 7; //reset position
+        globals.playerPos[1] = 8;
+        
+        globals.life -= 1;
+        globals.isThereMoney = false;
 
+        globals.spiderPos[0] = 1; //reset position
+        globals.spiderPos[1] = 1;
+    }
+}
 function updateTimer(timer)
 {
      //incrementamos el contador de cambio de valor
@@ -134,4 +233,12 @@ function updateTimer(timer)
          timer.timeChangeCounter = 0;
  
      }
+}
+function gameOverConditions()
+{
+    if (globals.life <= 0) {
+
+        globals.gameState = Game.GAME_OVER;
+    
+    }
 }
