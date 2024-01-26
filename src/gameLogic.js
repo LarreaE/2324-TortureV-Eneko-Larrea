@@ -44,7 +44,6 @@ function updateplayer()
 
         if (globals.level[0].data[globals.playerPos[0]][globals.playerPos[1]] === 4) { //hay colision
             globals.playerPos[0] += 1; //ha habido colision, corregimos
-            console.log("colision");
         }
     }
     else if (globals.action.moveDown && globals.previousDown === false) {
@@ -52,7 +51,6 @@ function updateplayer()
 
         if (globals.level[0].data[globals.playerPos[0]][globals.playerPos[1]] === 4) { //hay colision
             globals.playerPos[0] -= 1; //ha habido colision, corregimos
-            console.log("colision");
 
         }
     }
@@ -61,7 +59,6 @@ function updateplayer()
 
         if (globals.level[0].data[globals.playerPos[0]][globals.playerPos[1]] === 4) { //hay colision
             globals.playerPos[1] += 1; //ha habido colision, corregimos
-            console.log("colision");
 
         }
     }
@@ -70,7 +67,6 @@ function updateplayer()
 
         if (globals.level[0].data[globals.playerPos[0]][globals.playerPos[1]] === 4) { //hay colision
             globals.playerPos[1] -= 1; //ha habido colision, corregimos
-            console.log("colision");
 
         }
     }
@@ -89,7 +85,7 @@ function updateSpider()
 
     if (globals.spiderTimer.value <= 0) {
         spiderMove();
-        globals.spiderTimer.value = 8;
+        globals.spiderTimer.value = 1;
     }
 }
 function spiderMove()
@@ -149,10 +145,7 @@ function spiderMove()
         options.push(false);
 
     }
-    console.log("options: " + options);
-    let moving = [globals.spiderMovingUp,globals.spiderMovingDown,globals.spiderMovingLeft,globals.spiderMovingRight]
-    console.log("moving: " + moving);
-    console.log("spiderMoving: " + globals.spiderMoving);
+
     //ORDEN DE MOVIMIENTOS EN EL ARRAY 
     /* 
     0-UP
@@ -160,65 +153,19 @@ function spiderMove()
     2-LEFT
     3-RIGHT
     */
-
-    if (moveOptionCounter > 2) // si tiene opciones que haga el cambio aleatorio 
-    {
-        globals.spiderMoving = false;
+    
+    let randomNum = Math.floor(Math.random() * options.length);
+    if (randomNum === SPIDER.UP && options[SPIDER.UP]) {
+        globals.spiderPos[0] -= 1;
     }
-    if (!globals.spiderMoving) { //no ha empezado a moverse
-        
-        globals.spiderMoving = true;
-
-        let randomNum = Math.floor(Math.random()* options.length);
-
-        if (options[SPIDER.UP] === true && randomNum === SPIDER.UP ) {
-            console.log("BOP");
-            globals.spiderMovingUp = true;
-            globals.spiderPos[0] -= 1;
-
-        }
-        else if (options[SPIDER.DOWN] === true && randomNum === SPIDER.DOWN  ) {
-            console.log("ca");
-            
-            globals.spiderMovingDown = true;
-            globals.spiderPos[0] += 1;
-
-        }
-        else if (options[SPIDER.LEFT] === true && randomNum === SPIDER.LEFT ) {
-            console.log("a");
-            globals.spiderMovingLeft = true;
-            globals.spiderPos[1] -= 1;
-
-        }
-        else if (options[SPIDER.RIGHT] === true && randomNum === SPIDER.RIGHT ) {
-            console.log("ab");
-            
-            globals.spiderMovingRight = true;
-            globals.spiderPos[1] += 1;
-
-        }
+    else if (randomNum === SPIDER.DOWN && options[SPIDER.DOWN]) {
+        globals.spiderPos[0] += 1;
     }
-    else {  //continua camino
-        if (globals.spiderMovingUp) {
-
-            globals.spiderPos[0] -= 1;
-            
-        }
-        else if (globals.spiderMovingDown) {
-
-            globals.spiderPos[0] += 1;
-            
-        }
-        else if (globals.spiderMovingLeft) {
-            
-            globals.spiderPos[1] -= 1;
-            
-        }
-        else if (globals.spiderMovingRight) {
-            
-            globals.spiderPos[1] -= 1;
-
-        }
+    else if (randomNum === SPIDER.LEFT && options[SPIDER.LEFT]) {
+        globals.spiderPos[1] -= 1;
+    }
+    else if (randomNum === SPIDER.RIGHT && options[SPIDER.RIGHT]) {
+        globals.spiderPos[1] += 1;
     }
 }
 function updateMoney()
