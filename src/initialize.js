@@ -69,6 +69,13 @@ function initVars()
     }
 
     globals.spiderPos = [randomFil,randomCol]
+
+
+    globals.spiderCanUp     = false;
+    globals.spiderCanDown   = false;
+    globals.spiderCanLeft   = false;
+    globals.spiderCanRight  = false;
+    
 }
 
 //carga de activos:TILEMAPS, IMAGES, SOUNDS

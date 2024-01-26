@@ -1,5 +1,5 @@
 import globals from "./globals.js";
-import { Game } from "./constants.js";
+import { Game , mapHeight, mapWidth } from "./constants.js";
 
 
 export default function update()
@@ -35,6 +35,7 @@ function updatePlaying()
 {
     updateplayer();
     updateSpider();
+    updateMoney();
 }
 function updateplayer()
 {
@@ -90,7 +91,35 @@ function updateSpider()
 }
 function spiderMove()
 {
+
 }
+function updateMoney()
+{
+    
+    if (!globals.isThereMoney) {
+
+        for (let i = 0; i < mapHeight; i++) {
+
+            for (let j = 0; j < mapWidth; j++) {
+    
+    
+    
+                if (globals.level[0].data[i][j] === 0) {
+                    
+                    let dice = Math.random() * 100;
+                    console.log(dice);
+                    if (dice < 1) {
+                        globals.isThereMoney = true;
+                        globals.moneyPos[0] = i;
+                        globals.moneyPos[1] = j;
+                    }
+                }  
+            }
+        }
+    }
+    
+}
+
 function updateTimer(timer)
 {
      //incrementamos el contador de cambio de valor

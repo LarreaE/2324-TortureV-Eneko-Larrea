@@ -67,7 +67,7 @@ function renderMap()
                 globals.ctx.fillText(globals.emotes[1],32 + blockDim * (j), 48 + blockDim * i);
                 
             } 
-            if (globals.level[0].data[i][j] === 3) {
+            if (i === globals.moneyPos[0] && j === globals.moneyPos[1]) {
                 
                 globals.ctx.fillText(globals.emotes[2],32 + blockDim * (j), 48 + blockDim * i);
                 
@@ -83,7 +83,25 @@ function renderHUD()
     globals.ctx.fillStyle = 'purple';
     globals.ctx.fillText("Score:", 0, 26);
 
-    globals.ctx.fillText(globals.emotes[3], 200, 26);
+    drawHeart(globals.life)
 
+}
+function drawHeart(life)
+{
+    if (life === 1) {
 
+        globals.ctx.fillText(globals.emotes[3], 200, 26);
+        
+    }
+    else if (life === 2) {
+        globals.ctx.fillText(globals.emotes[3], 200, 26);
+        globals.ctx.fillText(globals.emotes[3], 232, 26);
+        
+    }
+    else if (life === 3) {
+        globals.ctx.fillText(globals.emotes[3], 200, 26);
+        globals.ctx.fillText(globals.emotes[3], 232, 26);
+        globals.ctx.fillText(globals.emotes[3], 264, 26);
+        
+    }
 }

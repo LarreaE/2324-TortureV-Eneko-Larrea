@@ -46,7 +46,7 @@ export default {
     previousDown: false,
 
     spiderTimer: [],
-    
+
     //life
     life: 0,
     
@@ -57,5 +57,12 @@ export default {
 
     spiderPos: [],
 
+    moneyPos: [],
 
+    spiderCanUp: false,
+    spiderCanDown: false,
+    spiderCanLeft: false,
+    spiderCanRight: false,
+
+    isThereMoney: false,
 }
