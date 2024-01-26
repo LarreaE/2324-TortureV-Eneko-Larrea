@@ -39,14 +39,12 @@ function drawGame()
 
     renderMap();
 
-    renderEmoticon();
-
     //dibujamos HUD
     renderHUD();
 }
 function renderMap()
 {
-    globals.ctx.font = '14px';
+    globals.ctx.font = '20px';
 
     console.log(globals.level[0].data[0]);
 
@@ -54,18 +52,28 @@ function renderMap()
 
         for (let j = 0; j < mapWidth; j++) {
 
-            if (globals.level[0].data[i][j] == 1) {
+            if (globals.level[0].data[i][j] === 4) {
                 
                 globals.ctx.fillText("\u2B1c",32 + blockDim * (j), 48 + blockDim * i);
                 
             }  
+            if (globals.level[0].data[i][j] === 1) {
+                
+                globals.ctx.fillText(globals.emotes[0],32 + blockDim * (j), 48 + blockDim * i);
+                
+            } 
+            if (globals.level[0].data[i][j] === 2) {
+                
+                globals.ctx.fillText(globals.emotes[1],32 + blockDim * (j), 48 + blockDim * i);
+                
+            } 
+            if (globals.level[0].data[i][j] === 3) {
+                
+                globals.ctx.fillText(globals.emotes[2],32 + blockDim * (j), 48 + blockDim * i);
+                
+            } 
         }     
     }
-}
-function renderEmoticon()
-{
-    globals.ctx.fillText(globals.emotes[0], 0, 70);
-
 }
 
 function renderHUD()
@@ -73,6 +81,6 @@ function renderHUD()
         // Draw score
     globals.ctx.font = '16px emulogic';
     globals.ctx.fillStyle = 'purple';
-    globals.ctx.fillText("Score", 0, 26);
+    globals.ctx.fillText("Score:", 0, 26);
 
 }

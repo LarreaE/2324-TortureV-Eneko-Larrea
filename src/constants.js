@@ -12,7 +12,7 @@ export const Game = {
 
 export const mapWidth = 17; //bloques
 export const mapHeight = 12; //bloques 
-export const blockDim = 16 // pixeles de alto y de ancho
+export const blockDim = 19 // pixeles de alto y de ancho
 export const FPS = 30;
 
 export const EMOTICON = {
